@@ -1,0 +1,65 @@
+```html
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>U = B Decoder</title>
+
+</head>
+
+<body style="font-family: Arial; text-align: center; padding: 2em;">
+
+  <h2>U = B Decoder</h2>
+
+  <p>Enter your coded message below:</p>
+
+  <textarea id="input" rows="5" cols="40" placeholder="Enter coded text here..."></textarea><br><br>
+
+  <button onclick="decode()">Decode</button>
+
+  <h3>Decoded message:</h3>
+
+  <p id="output" style="font-weight: bold;"></p>
+
+
+  <script>
+
+    function decode() {
+
+      const input = document.getElementById("input").value.toUpperCase();
+
+      let output = "";
+
+
+      for (let char of input) {
+
+        if (/[A-Z]/.test(char)) {
+
+          let decodedChar = String.fromCharCode(((char.charCodeAt(0) - 65 + 7) % 26) + 65);
+
+          output += decodedChar;
+
+        } else {
+
+          output += char; // Keep punctuation and spaces
+
+        }
+
+      }
+
+
+      document.getElementById("output").innerText = output;
+
+    }
+
+  </script>
+
+</body>
+
+</html>
+
