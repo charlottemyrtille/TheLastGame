@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8" />
+
+<title>Encodeur/Décodeur U=B</title>
+
+<style>
+
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 30px auto; padding: 20px; }
+
+  textarea { width: 100%; height: 100px; margin-bottom: 10px; font-size: 16px; }
+
+  button { padding: 10px 20px; margin-right: 10px; font-size: 16px; cursor: pointer; }
+
+  label { font-weight: bold; display: block; margin-top: 20px; }
+
+</style>
+
+</head>
+
+<body>
+
+<h1>The Last Game Encodeur / Décodeur </h1>
+
+
+<label for="inputText">Texte à encoder/décoder :</label>
+
+<textarea id="inputText" placeholder="Entre ton texte ici..."></textarea>
+
+
+<button onclick="processText(true)">Encoder</button>
+
+<button onclick="processText(false)">Décoder</button>
+
+
+<label for="outputText">Résultat :</label>
+
+<textarea id="outputText" readonly placeholder="Résultat ici..."></textarea>
+
+
+<script>
+
+  const shift = 19; // Décalage de 19 lettres
+
+
+  function processText(encode = true) {
+
+    const input = document.getElementById('inputText').value;
+
+const output = caesarShift(input, encode ? shift : (26 - shift));
+
+    document.getElementById('outputText').value = output;
+
+  }
+
+
+  function caesarShift(str, amount) {
+
+    return str.split('').map(char => {
+
+      const code = char.charCodeAt(0);
+
+      // Pour les majuscules A-Z
+
+      if (code >= 65 && code <= 90) {
+
+        return String.fromCharCode(((code - 65 + amount) % 26) + 65);
+
+      }
+
+      // Pour les minuscules a-z
+
+      else if (code >= 97 && code <= 122) {
+
+        return String.fromCharCode(((code - 97 + amount) % 26) + 97);
+
+      }
+
+      // Autres caractères restent inchangés
+
+      else {
+
+        return char;
+
+      }
+
+    }).join('');
+
+  }
+
+</script>
+
+
+</body>
+
+</html>
+
+
